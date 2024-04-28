@@ -1,0 +1,31 @@
+create database assignment3;
+
+create table sales_people(
+		s_num integer(4),
+        s_name varchar(10),
+        city varchar(10),
+        comm decimal(3,2)
+);
+
+
+CREATE TABLE CUSTOMERS (
+    C_NUM INTEGER(4),
+    C_NAME VARCHAR(10),
+    City VARCHAR(10),
+    Rating INTEGER(4),
+    S_NUM INTEGER(4)
+);
+
+
+
+SELECT * FROM CUSTOMERS;
+
+CREATE TABLE ORDERS (
+    O_NUM INTEGER(4),
+    AMT DECIMAL(7,2),
+    ORDER_DATE DATE,
+    C_NUM INTEGER(4),
+    S_NUM INTEGER(4)
+);
+
+

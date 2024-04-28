@@ -1,0 +1,48 @@
+CREATE TABLE Library (
+    Section VARCHAR(50),
+    BookID INT,
+    Book_name VARCHAR(100),
+    Authors VARCHAR(100),
+    borrower_ID INT,
+    borrower_name VARCHAR(100),
+    Issue_Date DATE,
+    Return_Date DATE
+);
+
+INSERT INTO Library (Section, BookID, Book_name, Authors, borrower_ID, borrower_name, Issue_Date, Return_Date) 
+VALUES 
+('Physics', 1, 'Physics Book 1', 'Author 1', 101, 'John Doe', '2024-01-01', '2024-01-15'),
+('Physics', 2, 'Physics Book 2', 'Author 2', 102, 'Jane Smith', '2024-01-05', '2024-01-20'),
+('Chemistry', 3, 'Chemistry Book 1', 'Author 3', 103, 'Alice Johnson', '2024-01-10', '2024-01-25'),
+('Chemistry', 4, 'Chemistry Book 2', 'Author 4', 104, 'Bob Williams', '2024-01-15', '2024-01-30'),
+-- Insert more records for other sections
+('English', 17, 'English Book 1', 'Author 7', 107, 'Eva Brown', '2024-01-20', '2024-02-05'),
+('English', 18, 'English Book 2', 'Author 8', 108, 'Michael Lee', '2024-02-01', '2024-02-15');
+-- Insert more records for other sections
+
+CREATE FUNCTION GetBookIssueCountInRange(book_id INT, start_date DATE, end_date DATE)
+RETURNS TABLE (book_name VARCHAR(100), issue_count INT)
+AS $$
+BEGIN
+    RETURN QUERY 
+    SELECT Book_name, COUNT(*) AS issue_count
+    FROM Library
+    WHERE BookID = book_id AND Issue_Date BETWEEN start_date AND end_date
+    GROUP BY Book_name;
+END;
+
+
+
+CREATE FUNCTION GetBorrowerBookIssueCount(book_id INT, borrower_id INT, month INT, year INT)
+RETURNS INT
+AS $$
+DECLARE
+    issue_count INT;
+BEGIN
+    SELECT COUNT(*) INTO issue_count
+    FROM Library
+    WHERE BookID = book_id AND borrower_ID = borrower_id AND EXTRACT(MONTH FROM Issue_Date) = month AND EXTRACT(YEAR FROM Issue_Date) = year;
+    
+    RETURN issue_count;
+END;
+

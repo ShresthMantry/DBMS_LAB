@@ -1,0 +1,21 @@
+CREATE DATABASE ASSIGNMENT_10;
+USE ASSIGNMENT_10;
+
+CREATE TABLE EMPLOYEE (
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(20) NOT NULL,
+    join_date DATE NOT NULL,
+    PRIMARY KEY (last_name, first_name, join_date)
+);
+
+INSERT INTO EMPLOYEE (first_name, last_name, join_date) VALUES
+('John', 'Doe', '2022-01-05'),
+('Jane', 'Smith', '2022-01-10'),
+('Michael', 'Johnson', '2022-02-15'),
+('Emily', 'Williams', '2022-02-20'),
+('David', 'Brown', '2022-03-25'),
+('Sarah', 'Miller', '2022-03-25'),
+('Chris', 'Davis', '2022-04-10'),
+('Jessica', 'Wilson', '2022-04-15'),
+('Kevin', 'Anderson', '2022-05-20'),
+('Amanda', 'Taylor', '2022-05-20');
